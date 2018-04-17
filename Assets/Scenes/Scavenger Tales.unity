@@ -1076,7 +1076,6 @@ GameObject:
   - component: {fileID: 897008119}
   - component: {fileID: 897008121}
   - component: {fileID: 897008122}
-  - component: {fileID: 897008123}
   - component: {fileID: 897008124}
   m_Layer: 5
   m_Name: UpgradeContainer
@@ -1195,18 +1194,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &897008123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 897008117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
 --- !u!114 &897008124
 MonoBehaviour:
   m_ObjectHideFlags: 0
