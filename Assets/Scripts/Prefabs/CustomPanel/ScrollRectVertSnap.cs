@@ -4,8 +4,9 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(VerticalLayoutGroup))]
+[RequireComponent(typeof(ScrollRect))]
 public class ScrollRectVertSnap : MonoBehaviour {
-	private GameObject scroll;
 	private RectTransform _scrollRect;
 	private VerticalLayoutGroup _vertScroll;
 	private bool _isScrolling;
@@ -17,13 +18,12 @@ public class ScrollRectVertSnap : MonoBehaviour {
 	private Vector2 _scrollVector;
 
 	private void Start() {
-		scroll = gameObject;
-		_scrollRect = scroll.GetComponent<ScrollRect>().GetComponent<RectTransform>();
-		_vertScroll = scroll.GetComponent<VerticalLayoutGroup>();
+		_scrollRect = GetComponent<ScrollRect>().GetComponent<RectTransform>();
+		_vertScroll = GetComponent<VerticalLayoutGroup>();
 		_scrollHeight = _scrollRect.rect.height;
-		_childCount = scroll.transform.childCount;
+		_childCount = transform.childCount;
 		for (int i = 0; i < _childCount; i++) {
-			_totalHeight += scroll.transform.GetChild(i).GetComponent<RectTransform>().rect.height + _vertScroll.spacing;
+			_totalHeight += transform.GetChild(i).GetComponent<RectTransform>().rect.height + _vertScroll.spacing;
 		}
 		_scrollBottom = _totalHeight - _scrollHeight;
 	}
@@ -39,11 +39,11 @@ public class ScrollRectVertSnap : MonoBehaviour {
 			else
 				_scrollVector.y = (_scrollPos < 0) ? 0 : _scrollBottom;
 			
-			scroll.GetComponent<ScrollRect>().velocity = Vector2.zero;
+			GetComponent<ScrollRect>().velocity = Vector2.zero;
 			_scrollRect.anchoredPosition = _scrollVector;
-			scroll.GetComponent<ScrollRect>().inertia = false;
+			GetComponent<ScrollRect>().inertia = false;
 		}
-		scroll.GetComponent<ScrollRect>().inertia = true;
+		GetComponent<ScrollRect>().inertia = true;
 	}
 
 	public void Scrolling(bool state) {

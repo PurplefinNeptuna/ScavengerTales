@@ -121,9 +121,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 71368643}
+  - component: {fileID: 71368645}
   - component: {fileID: 71368642}
   - component: {fileID: 71368644}
-  - component: {fileID: 71368645}
   m_Layer: 0
   m_Name: CoreScript
   m_TagString: CoreScript
@@ -167,9 +167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeList: {fileID: 897008117}
-  upgradePrefab: {fileID: 1814536293733232, guid: 8a1bf52507f86974a869152e72c4f182,
+  upgradePrefab: {fileID: 1085702648646962, guid: 392b66c982fdfca44b47dc801f0c74c2,
     type: 2}
-  upgradeCount: 5
 --- !u!114 &71368645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128f52bfc71b2c04abb220bbd5621f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pemulung: 0
   kantongSampah: 0
+  tongKecil: 0
+  tongBesar: 0
+  TPA: 0
 --- !u!1 &232477194
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +196,7 @@ GameObject:
   - component: {fileID: 232477197}
   - component: {fileID: 232477196}
   - component: {fileID: 232477195}
+  - component: {fileID: 232477199}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -263,6 +267,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &232477199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 232477194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1690312454, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967263
+  m_MaxRayIntersections: 0
 --- !u!1 &514431675
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,6 +423,8 @@ GameObject:
   m_Component:
   - component: {fileID: 536989109}
   - component: {fileID: 536989108}
+  - component: {fileID: 536989111}
+  - component: {fileID: 536989110}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -468,6 +489,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &536989110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 536989107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 71368642}
+          m_MethodName: DoQuit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
+--- !u!61 &536989111
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 536989107}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.38, y: 0.73}
+    newSize: {x: 0.38, y: 0.73}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.38, y: 0.73}
+  m_EdgeRadius: 0
 --- !u!1 &575329102
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +557,7 @@ GameObject:
   - component: {fileID: 575329104}
   m_Layer: 5
   m_Name: Quit
-  m_TagString: Untagged
+  m_TagString: QuitButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,7 +756,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
 --- !u!114 &897008122
@@ -887,7 +963,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 160, y: 42}
+  m_SizeDelta: {x: 320, y: 220}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1620228096
 MonoBehaviour:
@@ -915,13 +991,21 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 70
-    m_Alignment: 3
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Value: 0'
+  m_Text: 'Value1: 0
+
+    Value2: 0
+
+    Value3: 0
+
+    Value4: 0
+
+    Value5: 0'
 --- !u!222 &1620228097
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1031,7 +1115,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
