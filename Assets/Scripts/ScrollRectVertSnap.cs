@@ -34,7 +34,11 @@ public class ScrollRectVertSnap : MonoBehaviour {
 		if (_isScrolling)
 			return;
 		if (_scrollPos < 0 || _scrollPos > _scrollBottom) {
-			_scrollVector.y = (_scrollPos < 0) ? 0 : _scrollBottom;
+			if (_scrollBottom < 0)
+				_scrollVector.y = 0;
+			else
+				_scrollVector.y = (_scrollPos < 0) ? 0 : _scrollBottom;
+			
 			scroll.GetComponent<ScrollRect>().velocity = Vector2.zero;
 			_scrollRect.anchoredPosition = _scrollVector;
 			scroll.GetComponent<ScrollRect>().inertia = false;
