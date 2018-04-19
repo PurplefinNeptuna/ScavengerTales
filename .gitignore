@@ -76,6 +76,7 @@ bld/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
+[Tt]est_*/
 [Bb]uild[Ll]og.*
 
 # NUNIT

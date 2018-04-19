@@ -2,18 +2,23 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PanelController : MonoBehaviour {
+public class PanelController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler {
 
-	public delegate void OnClick();
-	public event OnClick Clicker;
+	public delegate void OnButtonClick();
+	public event OnButtonClick ButtonClicker;
 
 	public delegate void OnUpdate();
 	public event OnUpdate Updater;
 
+	public delegate void OnPanelClick();
+	public event OnPanelClick PanelClicker;
+
 	public string spriteName;
 	public string Name;
+	public string ButtonText;
 	public string Description;
 
 	private GameObject[] children;
@@ -23,7 +28,7 @@ public class PanelController : MonoBehaviour {
 	private GameObject PanelButton;
 
 	private void Awake() {
-		children = GetComponentsInChildren<Transform>().Where(i => i.parent == transform).Select(i => i.gameObject).ToArray();
+		children = GetComponentsInChildren<Transform>(true).Where(i => i.parent == transform).Select(i => i.gameObject).ToArray();
 		PanelImage = children.SingleOrDefault(i => i.name == "PanelImage");
 		PanelName = children.SingleOrDefault(i => i.name == "PanelName");
 		PanelDescription = children.SingleOrDefault(i => i.name == "PanelDescription");
@@ -31,18 +36,31 @@ public class PanelController : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start() {
-		PanelImage.GetComponent<Image>().sprite = Resources.LoadAll<Sprite>("Sprites/spritesheets").SingleOrDefault(i => i.name == spriteName);
+		PanelImage.GetComponent<Image>().sprite = GameCore.spriteList.SingleOrDefault(i => i.name == spriteName);
 		PanelName.GetComponent<Text>().text = Name;
+		PanelButton.GetComponentInChildren<Text>();
 	}
 	// Update is called once per frame
 	void Update() {
 		PanelDescription.GetComponent<Text>().text = Description;
+		PanelButton.GetComponentInChildren<Text>(true).text = ButtonText ?? "Test";
 		if (Updater != null)
 			Updater();
 	}
 
-	public void Click() {
-		if (Clicker != null)
-			Clicker();
+	public void ButtonClick() {
+		if (ButtonClicker != null)
+			ButtonClicker();
+	}
+
+	public void OnPointerClick(PointerEventData e) {
+		if (PanelClicker != null)
+			PanelClicker();
+	}
+
+	public void OnPointerDown(PointerEventData e) {
+	}
+
+	public void OnPointerUp(PointerEventData e) {
 	}
 }
