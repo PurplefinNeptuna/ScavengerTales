@@ -9,23 +9,19 @@ public class Upgrade {
 
 	#region UI
 	private String displayName;
-	private Transform parent;
-	private GameObject prefab;
 	private GameObject upgradeUIObject;
 	private UpgradeList upgradeList;
 	private PanelController panel;
 	#endregion
 
-	public Upgrade(String name, String displayName, Transform parent, GameObject prefab) {
+	public Upgrade(String name, String displayName) {
 		this.name = name;
 		level = 0;
 		this.displayName = displayName;
-		this.parent = parent;
-		this.prefab = prefab;
 	}
 
 	public void UIStart() {
-		upgradeList = new UpgradeList(name, displayName, prefab, parent);
+		upgradeList = new UpgradeList(name, displayName);
 		upgradeUIObject = upgradeList.Start();
 		panel = upgradeUIObject.GetComponent<PanelController>();
 		panel.ButtonClicker += Add;

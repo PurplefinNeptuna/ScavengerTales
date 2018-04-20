@@ -36,7 +36,7 @@ public class PanelController : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 	}
 	// Use this for initialization
 	void Start() {
-		PanelImage.GetComponent<Image>().sprite = GameCore.spriteList.SingleOrDefault(i => i.name == spriteName);
+		PanelImage.GetComponent<Image>().sprite = GameCore.main.spriteList.SingleOrDefault(i => i.name == spriteName);
 		PanelName.GetComponent<Text>().text = Name;
 		PanelButton.GetComponentInChildren<Text>();
 	}

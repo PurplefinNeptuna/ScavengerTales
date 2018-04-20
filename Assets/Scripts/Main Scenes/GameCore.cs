@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class GameCore : MonoBehaviour {
 
-	public static Sprite[] spriteList;
-	public static Upgrade[] upgrades;
-	public static Item[] items;
-	public static int money;
+	public static GameCore main;
+
+	public Sprite[] spriteList;
+	public Upgrade[] upgrades;
+	public Item[] items;
+	public int money;
 	// Use this for initialization
 
 	[Tooltip("Tempat list upgradeUI")]
@@ -32,24 +34,34 @@ public class GameCore : MonoBehaviour {
 	public GameObject craftPrefab;
 
 	void Awake() {
+		if (main == null) {
+			main = this;
+			Initialize();
+		}
+		else if (main != this) {
+			Destroy(gameObject);
+		}
+	}
+
+	private void Initialize() {
 		money = 0;
 		spriteList = Resources.LoadAll<Sprite>("Sprites/spritesheets");
 		upgrades = new[]{
-			new Upgrade("pemulung", "Bintang", upgradeList.transform, upgradePrefab),
-			new Upgrade("kantongSampah", "Kantong Sampah", upgradeList.transform, upgradePrefab),
-			new Upgrade("tongKecil", "Tong Sampah Kecil", upgradeList.transform, upgradePrefab),
-			new Upgrade("tongBesar", "Tong Sampah Besar", upgradeList.transform, upgradePrefab),
-			new Upgrade("TPA", "Kotak Sampah", upgradeList.transform, upgradePrefab)
+			new Upgrade("pemulung", "Bintang"),
+			new Upgrade("kantongSampah", "Kantong Sampah"),
+			new Upgrade("tongKecil", "Tong Sampah Kecil"),
+			new Upgrade("tongBesar", "Tong Sampah Besar"),
+			new Upgrade("TPA", "Kotak Sampah")
 		};
 		items = new[]{
-			new Item("botol", "Botol Bekas", invList.transform, invPrefab, 5, 10),
-			new Item("botolAir", "Botol Isi Air", invList.transform, invPrefab, 10, 10),
-			new Item("kayu", "Kayu", invList.transform, invPrefab, 8, 10),
-			new Item("kertas", "Sampah Kertas", invList.transform, invPrefab, 3, 10),
-			new Item("mainan", "Mainan", invList.transform, invPrefab, 25, 10),
-			new Item("makanan", "Makanan Sisa", invList.transform, invPrefab, 12, 10),
-			new Item("origami", "Origami Kertas", invList.transform, invPrefab, 6, 10),
-			new Item("plastik", "Plastik Bekas", invList.transform, invPrefab, 2, 10)
+			new Item("botol", "Botol Bekas", 5, 10),
+			new Item("botolAir", "Botol Isi Air", 10, 10),
+			new Item("kayu", "Kayu", 8, 10),
+			new Item("kertas", "Sampah Kertas", 3, 10),
+			new Item("mainan", "Mainan", 25, 10),
+			new Item("makanan", "Makanan Sisa", 12, 10),
+			new Item("origami", "Origami Kertas", 6, 10),
+			new Item("plastik", "Plastik Bekas", 2, 10)
 		};
 	}
 

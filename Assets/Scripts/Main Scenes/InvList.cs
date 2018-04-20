@@ -14,7 +14,7 @@ public class InvList {
 	public int value;
 	public int Count {
 		get {
-			return GameCore.items.SingleOrDefault(i => i.name == name).count;
+			return GameCore.main.items.SingleOrDefault(i => i.name == name).count;
 		}
 	}
 
@@ -23,15 +23,15 @@ public class InvList {
 	private Transform parent;
 	private PanelController panel;
 
-	public InvList(String name, String displayName,int value, GameObject prefab, Transform parent, String buttonText = "Sell", String details = "Lol") {
+	public InvList(String name, String displayName,int value, String buttonText = "Sell", String details = "Lol") {
 		this.name = name;
 		this.displayName = displayName;
 		this.value = value;
-		this.prefab = prefab;
-		this.parent = parent;
 		infoDisplay = "Value: ";
 		this.buttonText = buttonText;
 		this.details = details;
+		prefab = GameCore.main.invPrefab;
+		parent = GameCore.main.invList.transform;
 	}
 
 	public GameObject Start() {

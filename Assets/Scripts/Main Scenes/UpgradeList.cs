@@ -13,7 +13,7 @@ public class UpgradeList {
 	public String details;
 	public int Level {
 		get {
-			return GameCore.upgrades.SingleOrDefault(i => i.name == name).level;
+			return GameCore.main.upgrades.SingleOrDefault(i => i.name == name).level;
 		}
 	}
 
@@ -22,14 +22,14 @@ public class UpgradeList {
 	private Transform parent;
 	private PanelController panel;
 
-	public UpgradeList(String name, String displayName, GameObject prefab, Transform parent, String buttonText = "Upgrade", String details = "Lol") {
+	public UpgradeList(String name, String displayName, String buttonText = "Upgrade", String details = "Lol") {
 		this.name = name;
 		this.displayName = displayName;
-		this.prefab = prefab;
-		this.parent = parent;
 		levelDisplay = "Level: ";
 		this.buttonText = buttonText;
 		this.details = details;
+		prefab = GameCore.main.upgradePrefab;
+		parent = GameCore.main.upgradeList.transform;
 	}
 
 	public GameObject Start() {

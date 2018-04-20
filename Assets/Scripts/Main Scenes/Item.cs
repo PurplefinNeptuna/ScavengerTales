@@ -10,24 +10,20 @@ public class Item {
 
 	#region UI
 	private String displayName;
-	private Transform parent;
-	private GameObject prefab;
 	private GameObject invUIObject;
 	private InvList invList;
 	private PanelController panel;
 	#endregion
 
-	public Item(String name, String displayName, Transform parent, GameObject prefab, int value = 1, int count = 0) {
+	public Item(String name, String displayName, int value = 1, int count = 0) {
 		this.name = name;
 		this.count = count;
 		this.displayName = displayName;
-		this.parent = parent;
-		this.prefab = prefab;
 		this.value = value;
 	}
 
 	public void UIStart() {
-		invList = new InvList(name, displayName, value, prefab, parent);
+		invList = new InvList(name, displayName, value);
 		invUIObject = invList.Start();
 		panel = invUIObject.GetComponent<PanelController>();
 		panel.ButtonClicker += UseThis;
@@ -35,7 +31,7 @@ public class Item {
 
 	public void UseThis() {
 		if (count > 0) {
-			GameCore.money += value;
+			GameCore.main.money += value;
 			count--;
 		}
 		invList.Update();
