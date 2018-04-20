@@ -9,9 +9,10 @@ public class GameCore : MonoBehaviour {
 
 	public static GameCore main;
 
-	public Sprite[] spriteList;
-	public Upgrade[] upgrades;
-	public Item[] items;
+	private Sprite[] spriteList;
+	private Upgrade[] upgrades;
+	private Item[] items;
+	private Craft[] crafts;
 	public int money;
 	// Use this for initialization
 
@@ -32,6 +33,22 @@ public class GameCore : MonoBehaviour {
 
 	[Tooltip("GameObject buat craftUI")]
 	public GameObject craftPrefab;
+
+	public Item GetItem(String name) {
+		return items.First(i => i.name == name);
+	}
+
+	public Craft GetCraft(String name) {
+		return crafts.First(i => i.resultName == name);
+	}
+
+	public Upgrade GetUpgrade(String name) {
+		return upgrades.First(i => i.name == name);
+	}
+
+	public Sprite GetSprite(String name) {
+		return spriteList.First(i => i.name == name);
+	}
 
 	void Awake() {
 		if (main == null) {
@@ -63,6 +80,19 @@ public class GameCore : MonoBehaviour {
 			new Item("origami", "Origami Kertas", 6, 10),
 			new Item("plastik", "Plastik Bekas", 2, 10)
 		};
+		crafts = new[]{
+			new Craft("botolAir", 1, new[]{
+				new Ingredient("botol", 1)
+			}),
+			new Craft("origami", 1, new[]{
+				new Ingredient("kertas", 2)
+			}),
+			new Craft("mainan", 2, new[]{
+				new Ingredient("kayu", 2),
+				new Ingredient("botol", 1),
+				new Ingredient("plastik", 1)
+			})
+		};
 	}
 
 	private void Start() {
@@ -72,10 +102,22 @@ public class GameCore : MonoBehaviour {
 		foreach (Item i in items) {
 			i.UIStart();
 		}
+		foreach (Craft i in crafts) {
+			i.UIStart();
+		}
 	}
 
 	// Update is called once per frame
 	void Update() {
+		foreach (Upgrade i in upgrades) {
+			i.UIUpdate();
+		}
+		foreach (Item i in items) {
+			i.UIUpdate();
+		}
+		foreach (Craft i in crafts) {
+			i.UIUpdate();
+		}
 		GameObject target = GameObject.FindGameObjectWithTag("ResourceText");
 		Text targetText = target.GetComponent<Text>();
 		targetText.text = "Money: " + money;

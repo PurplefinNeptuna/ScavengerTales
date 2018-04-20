@@ -9,7 +9,7 @@ public class Item {
 	public String name;
 
 	#region UI
-	private String displayName;
+	public String displayName;
 	private GameObject invUIObject;
 	private InvList invList;
 	private PanelController panel;
@@ -27,6 +27,10 @@ public class Item {
 		invUIObject = invList.Start();
 		panel = invUIObject.GetComponent<PanelController>();
 		panel.ButtonClicker += UseThis;
+	}
+
+	public void UIUpdate() {
+		invList.Update();
 	}
 
 	public void UseThis() {

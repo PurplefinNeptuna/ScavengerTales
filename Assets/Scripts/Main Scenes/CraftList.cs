@@ -5,15 +5,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeList {
+public class CraftList {
 	public String name;
 	public String displayName;
-	public String levelDisplay;
+	public String resultDisplay;
 	public String buttonText;
 	public String details;
-	public int Level {
+	public int Qty {
 		get {
-			return GameCore.main.GetUpgrade(name).level;
+			return GameCore.main.GetCraft(name).resultQty;
 		}
 	}
 
@@ -22,14 +22,14 @@ public class UpgradeList {
 	private Transform parent;
 	private PanelController panel;
 
-	public UpgradeList(String name, String displayName, String buttonText = "Upgrade", String details = "Lol") {
+	public CraftList(String name, String displayName, String buttonText = "Craft", String details = "Lol") {
 		this.name = name;
 		this.displayName = displayName;
-		levelDisplay = "Level: ";
+		resultDisplay = "Qty: ";
 		this.buttonText = buttonText;
 		this.details = details;
-		prefab = GameCore.main.upgradePrefab;
-		parent = GameCore.main.upgradeList.transform;
+		prefab = GameCore.main.craftPrefab;
+		parent = GameCore.main.craftList.transform;
 	}
 
 	public GameObject Start() {
@@ -37,7 +37,7 @@ public class UpgradeList {
 		panel = gObject.GetComponent<PanelController>();
 		panel.Name = displayName;
 		panel.spriteName = name;
-		panel.Description = levelDisplay + Level;
+		panel.Description = resultDisplay + Qty;
 		panel.ButtonText = buttonText;
 		//panel.Updater += Update;
 		return gObject;
@@ -46,6 +46,6 @@ public class UpgradeList {
 	public void Update() {
 		panel.Name = displayName;
 		panel.spriteName = name;
-		panel.Description = levelDisplay + Level;
+		panel.Description = resultDisplay + Qty;
 	}
 }

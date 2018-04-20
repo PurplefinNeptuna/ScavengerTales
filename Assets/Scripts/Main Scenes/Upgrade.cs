@@ -27,6 +27,10 @@ public class Upgrade {
 		panel.ButtonClicker += Add;
 	}
 
+	public void UIUpdate() {
+		upgradeList.Update();
+	}
+
 	public void Add() {
 		level++;
 		upgradeList.Update();

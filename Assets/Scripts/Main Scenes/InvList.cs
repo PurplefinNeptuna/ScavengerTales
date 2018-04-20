@@ -14,7 +14,7 @@ public class InvList {
 	public int value;
 	public int Count {
 		get {
-			return GameCore.main.items.SingleOrDefault(i => i.name == name).count;
+			return GameCore.main.GetItem(name).count;
 		}
 	}
 
